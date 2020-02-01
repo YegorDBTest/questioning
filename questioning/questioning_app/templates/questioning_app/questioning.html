@@ -1,9 +1,14 @@
 {% extends "questioning_app/base.html" %}
 
-{% block title %}Анекта{% endblock %}
+{% block title %}Анкета{% endblock %}
 
 {% block content %}
   <div class="container">
-    Анкета
+        <h1>Анкета</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Отправить">
+        </form>
   </div>
 {% endblock %}

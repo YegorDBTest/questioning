@@ -1,7 +1,10 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.base import TemplateView, RedirectView
+from django.views.generic.edit import CreateView
 from django.urls import reverse
+
+from questioning_app.forms import QuestioningForm
 
 
 class IndexView(TemplateView):
@@ -27,9 +30,23 @@ class GuestLoginView(RedirectView):
         return reverse('questioning')
 
 
-class QuestioningView(LoginRequiredMixin, TemplateView):
+class QuestioningView(LoginRequiredMixin, CreateView):
     '''
     Страница анкетирования.
     '''
 
+    login_url = '/'
     template_name = 'questioning_app/questioning.html'
+    form_class = QuestioningForm
+    success_url = '/showcase/'
+
+    def post(self, request, *args, **kwargs):
+        self._request = request
+
+        return super().post(request, *args, **kwargs)
+
+    def form_valid(self, *args, **kwargs):
+        response = super().form_valid(*args, **kwargs)
+        login(self._request, self.object)
+
+        return response
