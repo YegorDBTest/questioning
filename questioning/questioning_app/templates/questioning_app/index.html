@@ -1,0 +1,11 @@
+{% extends "questioning_app/base.html" %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <a href="{% url 'guest-login' %}">
+      <button class="btn btn-success">Войти в систему как гость</button>
+    </a>
+  </div>
+{% endblock %}
