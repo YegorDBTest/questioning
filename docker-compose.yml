@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres:12.1
+    environment:
+      POSTGRES_PASSWORD: qwerty
+      POSTGRES_USER: root
+      POSTGRES_DB: questioning_db
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - "./db/data:/var/lib/postgresql/data/pgdata"
+
+  questioning:
+    build:
+      context: ./questioning
+    entrypoint: /app/entrypoint.sh
+    volumes:
+      - "./questioning/:/app/"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
