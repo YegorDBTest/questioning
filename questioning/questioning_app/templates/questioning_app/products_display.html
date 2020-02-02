@@ -1,17 +1,16 @@
 <div class="row">
   {% for product in products %}
-    <div class="col-md-4 product-inner-box">
+    <div class="col-md-4 product-inner-box box-shadow">
+      <div class="product-name text-center">
+        {{ product.name }}
+      </div>
       <div class="row product-box">
-        <span class="col-md-7">Наименование</span>
-        <span class="col-md-5">{{ product.name }}</span>
-        <span class="col-md-7">Код товара</span>
-        <span class="col-md-5">{{ product.code }}</span>
-        <span class="col-md-7">Стоимость</span>
-        <span class="col-md-5">{{ product.price }} руб.</span>
+        <span class="col-md-6">{{ product.code }}</span>
+        <span class="col-md-6 text-right">{{ product.price }} руб.</span>
       </div>
       {% if buttons_on %}
-        <div>
-          <button class="product-button product-button-hidden" data-product-id="{{ product.id }}">
+        <div class="text-center">
+          <button class="product-button product-button-hidden btn btn-secondary" data-product-id="{{ product.id }}">
             <span class="add-product-button-name">Добавить в заказ</span>
             <span class="remove-product-button-name">Убрать из заказа</span>
           </button>

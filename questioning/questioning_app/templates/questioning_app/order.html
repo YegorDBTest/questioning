@@ -4,6 +4,7 @@
 {% block title %}Заказ{% endblock %}
 
 {% block head %}
+  <link rel="stylesheet" type="text/css" href="{% static 'questioning_app/css/base_with_products.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'questioning_app/css/order.css' %}">
 {% endblock %}
 
@@ -22,10 +23,16 @@
     <form method="post">
       {% csrf_token %}
       {{ form.as_p }}
-      <a href="{% url 'showcase' %}">
-        <input id="cancel-order-button" type="button" value="Отменить">
-      </a>
-      <input type="submit" value="Подтвердить">
+      <div class="row">
+        <div class="col-md-6">
+          <a href="{% url 'showcase' %}">
+            <input class="btn btn-secondary" id="cancel-order-button" type="button" value="Отменить">
+          </a>
+        </div>
+        <div class="col-md-6 text-right">
+          <input class="btn btn-primary" type="submit" value="Подтвердить">
+        </div>
+      </div>
     </form>
   </div>
 {% endblock %}

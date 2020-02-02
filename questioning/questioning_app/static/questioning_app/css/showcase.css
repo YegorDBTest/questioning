@@ -1,11 +1,3 @@
-.product-inner-box {
-  padding: 0px 50px;
-}
-
-.product-box {
-  background-color: white;
-}
-
 .product-button.product-button-hidden {
   display: none;
 }
@@ -24,4 +16,8 @@
 
 .product-button.product-button-selected > .add-product-button-name {
   display: none;
+}
+
+#move-to-order {
+	padding-top: 40px;
 }

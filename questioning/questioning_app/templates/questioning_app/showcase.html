@@ -4,6 +4,7 @@
 {% block title %}Витрина{% endblock %}
 
 {% block head %}
+  <link rel="stylesheet" type="text/css" href="{% static 'questioning_app/css/base_with_products.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'questioning_app/css/showcase.css' %}">
 {% endblock %}
 
@@ -16,8 +17,10 @@
   <div class="container">
     <h1>Витрина</h1>
     {% include "questioning_app/products_display.html" with products=object_list buttons_on=True %}
-    <a href="{% url 'order' %}">
-      <button id="move-to-order-button">Оформить заказ</button>
-    </a>
+    <div class="text-right" id="move-to-order">
+      <a href="{% url 'order' %}">
+        <button class="btn btn-primary" id="move-to-order-button">Оформить заказ</button>
+      </a>
+    </div>
   </div>
 {% endblock %}

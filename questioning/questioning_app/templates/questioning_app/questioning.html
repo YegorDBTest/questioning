@@ -7,8 +7,31 @@
     <h1>Анкета</h1>
     <form method="post">
       {% csrf_token %}
-      {{ form.as_p }}
-      <input type="submit" value="Отправить">
+      {% if form.non_field_errors %}
+        <div class="alert alert-danger" role="alert">
+          {{ form.non_field_errors }}
+        </div>
+      {% endif %}
+      {% for field in form %}
+        {% if not field.is_hidden %}
+          <div class="form-group">
+            {% if field.errors %}
+              <div class="alert alert-danger" role="alert">
+                {{ field.errors }}
+              </div>
+            {% endif %}
+            <div class="row">
+              <div class="col-md-6 text-right">
+                <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+              </div>
+              <div class="col-md-6">{{ field }}</div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+      <div class="text-right">
+        <input class="btn btn-primary" type="submit" value="Отправить">
+      </div>
     </form>
   </div>
 {% endblock %}
