@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import Permission
 from django.utils import timezone
 
-from questioning_app.models import User
+from questioning_app.models import User, Order
 
 
 class QuestioningForm(forms.ModelForm):
@@ -68,3 +68,9 @@ class QuestioningForm(forms.ModelForm):
             Permission.objects.get(codename='showcase_allowed')
         )
         return user
+
+
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ('user', 'products')

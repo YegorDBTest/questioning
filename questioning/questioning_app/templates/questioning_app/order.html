@@ -1,0 +1,31 @@
+{% extends "questioning_app/base.html" %}
+{% load static %}
+
+{% block title %}Заказ{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="{% static 'questioning_app/css/order.css' %}">
+{% endblock %}
+
+{% block tail %}
+  <script type="text/javascript">
+    var userId = '{{ request.user.id }}';
+  </script>
+  <script src="{% static 'questioning_app/js/base_with_products.js' %}"></script>
+  <script src="{% static 'questioning_app/js/order.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>Заказ</h1>
+    {% include "questioning_app/products_display.html" with products=products buttons_on=False %}
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <a href="{% url 'showcase' %}">
+        <input id="cancel-order-button" type="button" value="Отменить">
+      </a>
+      <input type="submit" value="Подтвердить">
+    </form>
+  </div>
+{% endblock %}

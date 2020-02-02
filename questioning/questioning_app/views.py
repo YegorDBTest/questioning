@@ -5,7 +5,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from django.urls import reverse
 
-from questioning_app.forms import QuestioningForm
+from questioning_app.forms import QuestioningForm, OrderForm
 from questioning_app.models import Product
 
 
@@ -42,15 +42,9 @@ class QuestioningView(LoginRequiredMixin, CreateView):
     form_class = QuestioningForm
     success_url = '/showcase/'
 
-    def post(self, request, *args, **kwargs):
-        self._request = request
-
-        return super().post(request, *args, **kwargs)
-
     def form_valid(self, *args, **kwargs):
         response = super().form_valid(*args, **kwargs)
-        login(self._request, self.object)
-
+        login(self.request, self.object)
         return response
 
 
@@ -63,3 +57,22 @@ class ShowcaseView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     template_name = 'questioning_app/showcase.html'
     permission_required = 'questioning_app.showcase_allowed'
     model = Product
+
+
+class OrderView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    '''
+    Страница с заказом.
+    '''
+
+    login_url = '/'
+    template_name = 'questioning_app/order.html'
+    permission_required = 'questioning_app.showcase_allowed'
+    form_class = OrderForm
+    success_url = '/'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        products_ids = self.request.COOKIES.get('order-products')
+        if products_ids:
+            context['products'] = Product.objects.filter(id__in=products_ids.split(','))
+        return context
