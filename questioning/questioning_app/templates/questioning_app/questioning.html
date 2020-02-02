@@ -4,11 +4,11 @@
 
 {% block content %}
   <div class="container">
-        <h1>Анкета</h1>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Отправить">
-        </form>
+    <h1>Анкета</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Отправить">
+    </form>
   </div>
 {% endblock %}
