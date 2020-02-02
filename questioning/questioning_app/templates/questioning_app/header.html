@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        {% if request.user.is_authenticated %}
+          {% if request.user.first_name or request.user.last_name %}
+            {{ request.user.first_name }} {{ request.user.last_name }}
+          {% else %}
+            {{ request.user.username }}
+          {% endif %}
+        {% else %}
+          Неизвестный пользователь
+        {% endif %}
+      </li>
+    </ul>
+    {% if request.user.is_authenticated %}
+      <a href="{% url 'logout' %}">
+        <button>Завершить сеанс</button>
+      </a>
+    {% endif %}
+  </div>
+</nav>

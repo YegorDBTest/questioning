@@ -22,7 +22,7 @@ def get_models(apps):
 def create_data(apps, schema_editor):
     User, Product = get_models(apps)
     User.objects.create_superuser('qwerty', '', 'qwerty')
-    User.objects.create_user('guest', password='guest')
+    User.objects.create_user('guest', password='guest', first_name='Гость')
     Product.objects.bulk_create([Product(**p) for p in products])
 
 

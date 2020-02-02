@@ -1,11 +1,15 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
   <title>{% block title %}{% endblock %}</title>
   <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'questioning_app/css/base.css' %}">
   {% block head %}{% endblock %}
 </head>
 <body>
+  {% include "questioning_app/header.html" %}
   {% block content %}{% endblock %}
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

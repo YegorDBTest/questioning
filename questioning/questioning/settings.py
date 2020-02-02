@@ -124,3 +124,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 AUTH_USER_MODEL = 'questioning_app.User'
+
+LOGOUT_REDIRECT_URL = '/'
