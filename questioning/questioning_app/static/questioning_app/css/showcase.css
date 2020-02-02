@@ -1,0 +1,27 @@
+.product-inner-box {
+  padding: 0px 50px;
+}
+
+.product-box {
+  background-color: white;
+}
+
+.product-button.product-button-hidden {
+  display: none;
+}
+
+.product-button > .add-product-button-name {
+  display: block;
+}
+
+.product-button > .remove-product-button-name {
+  display: none;
+}
+
+.product-button.product-button-selected > .remove-product-button-name {
+  display: block;
+}
+
+.product-button.product-button-selected > .add-product-button-name {
+  display: none;
+}

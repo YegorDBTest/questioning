@@ -1,0 +1,41 @@
+{% extends "questioning_app/base.html" %}
+{% load static %}
+
+{% block title %}Витрина{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="{% static 'questioning_app/css/showcase.css' %}">
+{% endblock %}
+
+{% block tail %}
+  <script src="{% static 'questioning_app/js/showcase.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>Витрина</h1>
+    <div class="row">
+      {% for product in object_list %}
+        <div class="col-md-4 product-inner-box">
+          <div class="row product-box">
+            <span class="col-md-7">Наименование</span>
+            <span class="col-md-5">{{ product.name }}</span>
+            <span class="col-md-7">Код товара</span>
+            <span class="col-md-5">{{ product.code }}</span>
+            <span class="col-md-7">Стоимость</span>
+            <span class="col-md-5">{{ product.price }} руб.</span>
+          </div>
+          <div>
+            <button class="product-button product-button-hidden" data-product-id="{{ product.id }}">
+              <span class="add-product-button-name">Добавить в заказ</span>
+              <span class="remove-product-button-name">Убрать из заказа</span>
+            </button>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <a href="{% url 'order' %}">
+      <button>Перейти к заказу</button>
+    </a>
+  </div>
+{% endblock %}

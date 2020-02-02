@@ -1,10 +1,12 @@
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.base import TemplateView, RedirectView
 from django.views.generic.edit import CreateView
+from django.views.generic.list import ListView
 from django.urls import reverse
 
 from questioning_app.forms import QuestioningForm
+from questioning_app.models import Product
 
 
 class IndexView(TemplateView):
@@ -50,3 +52,14 @@ class QuestioningView(LoginRequiredMixin, CreateView):
         login(self._request, self.object)
 
         return response
+
+
+class ShowcaseView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    '''
+    Страница с витриной.
+    '''
+
+    login_url = '/'
+    template_name = 'questioning_app/showcase.html'
+    permission_required = 'questioning_app.showcase_allowed'
+    model = Product
