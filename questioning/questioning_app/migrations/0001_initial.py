@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
                 ('is_active', models.BooleanField(default=True, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')),
                 ('date_joined', models.DateTimeField(default=django.utils.timezone.now, verbose_name='date joined')),
                 ('age', models.PositiveIntegerField(null=True, verbose_name='Возраст')),
-                ('occupation', models.CharField(choices=[('EC', 'Экономика'), ('MD', 'Медицина'), ('IT', 'IT')], default='EC', max_length=2, null=True, verbose_name='Род деятельности')),
+                ('occupation', models.CharField(choices=[('EC', 'Экономика'), ('MD', 'Медицина'), ('IT', 'IT')], default='EC', max_length=2, null=True, verbose_name='Область деятельности')),
                 ('facebook_username', models.CharField(blank=True, max_length=255, null=True, verbose_name='Имя пользователя в Facebook')),
                 ('groups', models.ManyToManyField(blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', related_name='user_set', related_query_name='user', to='auth.Group', verbose_name='groups')),
                 ('user_permissions', models.ManyToManyField(blank=True, help_text='Specific permissions for this user.', related_name='user_set', related_query_name='user', to='auth.Permission', verbose_name='user permissions')),

@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.db.models import Sum
 from django.views.generic.base import TemplateView, RedirectView
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
@@ -74,5 +75,7 @@ class OrderView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
         context = super().get_context_data(*args, **kwargs)
         products_ids = self.request.COOKIES.get('order-products')
         if products_ids:
-            context['products'] = Product.objects.filter(id__in=products_ids.split(','))
+            products = Product.objects.filter(id__in=products_ids.split(','))
+            context['products'] = products
+            context['total_price'] = products.aggregate(Sum('price'))['price__sum']
         return context

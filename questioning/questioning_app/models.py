@@ -13,7 +13,7 @@ class User(AbstractUser):
     )
 
     age = models.PositiveIntegerField('Возраст', null=True)
-    occupation = models.CharField('Род деятельности', choices=OCCUPATIONS, default=ECONOMY, max_length=2, null=True)
+    occupation = models.CharField('Область деятельности', choices=OCCUPATIONS, default=ECONOMY, max_length=2, null=True)
     facebook_username = models.CharField('Имя пользователя в Facebook', max_length=255, blank=True, null=True)
 
 

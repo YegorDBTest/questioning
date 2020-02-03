@@ -20,6 +20,9 @@
   <div class="container">
     <h1>Заказ</h1>
     {% include "questioning_app/products_display.html" with products=products buttons_on=False %}
+    <div>
+      Сумма заказа {{total_price}} руб.
+    </div>
     <form method="post">
       {% csrf_token %}
       {{ form.as_p }}
